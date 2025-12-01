@@ -8,7 +8,7 @@ public class Build
 {
     public static void BuildWindows()
     {
-        string path = "Build/Windows";
+        string path = $"Build/{PlayerSettings.productName}-{PlayerSettings.bundleVersion}-{DateTime.Now}-Windows";
         CreateDirectory(path);
 
         BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions
