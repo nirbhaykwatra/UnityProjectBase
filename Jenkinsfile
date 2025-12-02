@@ -6,7 +6,6 @@ def UNITY_INSTALLATION = "C:\\Program Files\\Unity\\Hub\\Editor\\${UNITY_VERSION
 pipeline{
     environment{
         PROJECT_PATH = "${CUSTOM_WORKSPACE}"
-        ENV_PROJECT_NAME = "${PROJECT_NAME}"
         NEXUS_PASSWORD = credentials("NEXUS_PASSWORD")
     }
 
@@ -36,7 +35,7 @@ pipeline{
             steps{
                 script{
                     def buildDate = new Date().format("yyyy-MM-dd_HH-mm-ss")
-                    env.ARTIFACT_NAME = "%ENV_PROJECT_NAME%_${buildDate}.zip"
+                    env.ARTIFACT_NAME = "${PROJECT_NAME}_${buildDate}.zip"
                     bat '''
                     curl -u nirbhaykwatra:%NEXUS_PASSWORD% --upload-file %PROJECT_PATH%\\Build\\Windows.zip http://192.168.1.245:8081/repository/UnityProjectBase/Windows_Builds/%ARTIFACT_NAME%
                     '''
