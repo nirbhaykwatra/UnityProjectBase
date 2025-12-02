@@ -36,8 +36,9 @@ pipeline{
                 script{
                     def buildDate = new Date().format("yyyy-MM-dd_HH-mm-ss")
                     env.ARTIFACT_NAME = "${PROJECT_NAME}_${buildDate}.zip"
+                    env.DATE = "${buildDate}"
                     bat '''
-                    curl -u nirbhaykwatra:%NEXUS_PASSWORD% --upload-file %PROJECT_PATH%\\Build\\Windows.zip http://192.168.1.245:8081/repository/UnityProjectBase/Windows_Builds/%ARTIFACT_NAME%
+                    curl -u nirbhaykwatra:%NEXUS_PASSWORD% --upload-file %PROJECT_PATH%\\Build\\Windows.zip http://192.168.1.245:8081/repository/UnityProjectBase/Windows_Builds/%DATE%/%ARTIFACT_NAME%
                     '''
                 }
             }
