@@ -42,6 +42,19 @@ pipeline{
                     curl -u nirbhaykwatra:%NEXUS_PASSWORD% --upload-file %PROJECT_PATH%\\Build\\Windows.zip http://192.168.1.245:8081/repository/UnityProjectBase/Windows_Builds/%DATE%/%ARTIFACT_NAME%
                     '''
                 }
+                script{
+                    def nexusLink = 'http://servers.codrx.net:5000/repository/%PROJECT_NAME%/Windows_Builds/%DATE%/%ARTIFACT_NAME%'
+                    def embed = '{"embeds": [{
+                        "title": "%ARTIFACT_NAME%",
+                        "description": "Build Succeeded.",
+                        "color": 3447003,
+                    }
+                ]}'
+
+                bat '''
+                curl -H "Content-Type: application/json" -X POST -d https://discord.com/api/webhooks/1445703148751814717/x1spLSEStlGUCLQYtmwwV0MbvmO-6SDfdtta8MLujE63iYf0zzrEr2cit62Wj4W6Ju8V
+                '''
+                }
             }
         }
 
