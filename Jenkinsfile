@@ -43,13 +43,8 @@ pipeline{
                     '''
                 }
                 script{
-                    def nexusLink = 'http://servers.codrx.net:5000/repository/%PROJECT_NAME%/Windows_Builds/%DATE%/%ARTIFACT_NAME%'
-                    def embed = '{"embeds": [{
-                        "title": "%ARTIFACT_NAME%",
-                        "description": "Build Succeeded.",
-                        "color": 3447003,
-                    }
-                ]}'
+                    env.NEXUS_LINK = 'http://servers.codrx.net:5000/repository/%PROJECT_NAME%/Windows_Builds/%DATE%/%ARTIFACT_NAME%'
+                    def embed = '{"embeds": [{"title": "%ARTIFACT_NAME%","description": "Build Succeeded.","color": 3447003,"url":"%NEXUS_LINK"}]}'
 
                 bat '''
                 curl -H "Content-Type: application/json" -X POST -d https://discord.com/api/webhooks/1445703148751814717/x1spLSEStlGUCLQYtmwwV0MbvmO-6SDfdtta8MLujE63iYf0zzrEr2cit62Wj4W6Ju8V
