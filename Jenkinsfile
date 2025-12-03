@@ -44,10 +44,10 @@ pipeline{
                 }
                 script{
                     env.NEXUS_LINK = 'http://servers.codrx.net:5000/repository/%PROJECT_NAME%/Windows_Builds/%DATE%/%ARTIFACT_NAME%'
-                    env.EMBED = '{"embeds": [{"title": "%ARTIFACT_NAME%","description": "Build Succeeded.","color": 3447003,"url":"%NEXUS_LINK"}]}'
+                    env.EMBED = '{"embeds": [{"title": "%ARTIFACT_NAME%","description": "Build Succeeded.","color": 3447003,"url":"%NEXUS_LINK%"}]}'
 
                 bat '''
-                curl -H "Content-Type: application/json" -X POST -d %EMBED% https://discord.com/api/webhooks/1445703148751814717/x1spLSEStlGUCLQYtmwwV0MbvmO-6SDfdtta8MLujE63iYf0zzrEr2cit62Wj4W6Ju8V
+                curl -H "Content-Type: application/json" -X POST -d '%EMBED%' https://discord.com/api/webhooks/1445703148751814717/x1spLSEStlGUCLQYtmwwV0MbvmO-6SDfdtta8MLujE63iYf0zzrEr2cit62Wj4W6Ju8V
                 '''
                 }
             }
