@@ -42,7 +42,7 @@ pipeline{
                     curl -u nirbhaykwatra:%NEXUS_PASSWORD% --upload-file %PROJECT_PATH%\\Build\\Windows.zip http://192.168.1.245:8081/repository/UnityProjectBase/Windows_Builds/%DATE%/%ARTIFACT_NAME%
                     '''
                 }
-                discordSend description: "", footer: "Jenkins", link: "http://servers.codrx.net:5000/repository/${env.PROJECT_NAME}/Windows_Builds/${env.DATE}/${env.ARTIFACT_NAME}", result: currentBuild.currentResult, title: "${env.ARTIFACT_NAME}", webhookURL: "https://discord.com/api/webhooks/1445703148751814717/x1spLSEStlGUCLQYtmwwV0MbvmO-6SDfdtta8MLujE63iYf0zzrEr2cit62Wj4W6Ju8V"
+                discordSend customAvatarUrl: "https://alt-battles.fandom.com/wiki/SCP-6488" custonUsername: "SCP-6488" description: "", footer: "Jenkins", link: "http://servers.codrx.net:5000/repository/${env.PROJECT_NAME}/Windows_Builds/${env.DATE}/${env.ARTIFACT_NAME}", result: currentBuild.currentResult, title: "${env.ARTIFACT_NAME}", showChangeset: true, successful: currentBuild.resultIsBetterOrEqualTo('SUCCESS'), webhookURL: "https://discord.com/api/webhooks/1445703148751814717/x1spLSEStlGUCLQYtmwwV0MbvmO-6SDfdtta8MLujE63iYf0zzrEr2cit62Wj4W6Ju8V"
             }
         }
     }
