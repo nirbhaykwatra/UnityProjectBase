@@ -42,13 +42,7 @@ pipeline{
                     curl -u nirbhaykwatra:%NEXUS_PASSWORD% --upload-file %PROJECT_PATH%\\Build\\Windows.zip http://192.168.1.245:8081/repository/UnityProjectBase/Windows_Builds/%DATE%/%ARTIFACT_NAME%
                     '''
                 }
-                script{
-                    def nexusLink = 'http://servers.codrx.net:5000/repository/%PROJECT_NAME%/Windows_Builds/%DATE%/%ARTIFACT_NAME%'
-
-                    bat """
-                    curl -H "Content-Type: application/json" -X POST -d '{"embeds":[{"title":"${env.ARTIFACT_LINK}","description":"Build Succeeded!","url":"${nexusLink}","color":3066993,"fields":[{"name":"Status","value":"✅ Success","inline":true}]}]}' https://discord.com/api/webhooks/1445703148751814717/x1spLSEStlGUCLQYtmwwV0MbvmO-6SDfdtta8MLujE63iYf0zzrEr2cit62Wj4W6Ju8V
-                    """
-                }
+                discordSend description: "", footer: "Jenkins", link: "http://servers.codrx.net:5000/repository/${env.PROJECT_NAME}/Windows_Builds/${env.DATE}/${env.ARTIFACT_NAME}", result: currentBuild.currentResult, title: "${env.ARTIFACT_NAME}", webhookURL: "https://discord.com/api/webhooks/1445703148751814717/x1spLSEStlGUCLQYtmwwV0MbvmO-6SDfdtta8MLujE63iYf0zzrEr2cit62Wj4W6Ju8V"
             }
         }
     }
