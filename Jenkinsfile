@@ -43,12 +43,31 @@ pipeline{
                     '''
                 }
                 script{
-                    env.NEXUS_LINK = 'http://servers.codrx.net:5000/repository/%PROJECT_NAME%/Windows_Builds/%DATE%/%ARTIFACT_NAME%'
-                    env.EMBED = '{"embeds": [{"title": "%ARTIFACT_NAME%","description": "Build Succeeded.","color": 3447003,"url":"%NEXUS_LINK%"}]}'
+                    def nexusLink = 'http://servers.codrx.net:5000/repository/%PROJECT_NAME%/Windows_Builds/%DATE%/%ARTIFACT_NAME%'
 
-                bat '''
-                curl -H "Content-Type: application/json" -X POST -d '%EMBED%' https://discord.com/api/webhooks/1445703148751814717/x1spLSEStlGUCLQYtmwwV0MbvmO-6SDfdtta8MLujE63iYf0zzrEr2cit62Wj4W6Ju8V
-                '''
+                    def payload = """{
+                    "embeds": [{
+                        "title": "${env.ARTIFACT_NAME}",
+                        "description": "",
+                        "url": "${nexusLink}",
+                        "color": 3066993,
+                        "fields": [
+                            {
+                                "name": "Status",
+                                "value": "✅ Success",
+                                "inline": true
+                            },
+                        ],
+                        "footer": {
+                            "text": "Jenkins CI/CD"
+                        },
+                        "timestamp": "${new Date().format("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone('UTC'))}"
+                    }]
+                }"""
+
+                    bat '''
+                    curl -H "Content-Type: application/json" -X POST -d '${payload.replaceAll("'", "'\\\\''")}' https://discord.com/api/webhooks/1445703148751814717/x1spLSEStlGUCLQYtmwwV0MbvmO-6SDfdtta8MLujE63iYf0zzrEr2cit62Wj4W6Ju8V
+                    '''
                 }
             }
         }
