@@ -65,12 +65,11 @@ pipeline{
                     }]
                 }"""
 
-                    bat '''
+                    bat """
                     curl -H "Content-Type: application/json" -X POST -d '${payload.replaceAll("'", "'\\\\''")}' https://discord.com/api/webhooks/1445703148751814717/x1spLSEStlGUCLQYtmwwV0MbvmO-6SDfdtta8MLujE63iYf0zzrEr2cit62Wj4W6Ju8V
-                    '''
+                    """
                 }
             }
         }
-
     }
 }
