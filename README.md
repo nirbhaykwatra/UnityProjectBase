@@ -26,4 +26,4 @@ Respawn Enemies      | F5
 <Team Member 2 - Role>  
 <Team Member 3 - Role>  
 <Team Member 4 - Role>  
-<Team Member 5 - Role>  
+<Team Member 5 - Role>   
